@@ -1,0 +1,90 @@
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+    display: block;
+    clip-path: ellipse(100% 60% at 50% 40%);
+}
+
+
+
+.grid-item p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color : white;
+    text-align: center;
+    
+}
+
+.grid-item {
+    box-shadow: 10px 10px 10px rgba(119, 76, 40, 0.5);
+    border-radius: 1rem;
+    text-align: center;
+    background:rgba(212, 161, 51, 0.8);
+}
+
+.horizontal-item {
+    background-color: rgba(240,234,234, 0.42);
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    
+    border-radius: 4px;
+    display: block;
+}
+
+.horizontal-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem 1rem 1rem 1rem;
+    display: block; 
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.card-buttons .quantity {
+    font-size: 1.2rem;
+    padding: 0px 10px 0px 10px;
+    background: white;
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+}
+.quantity-buttons {
+    width: 6.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+.card-content {
+    flex: 1;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+.item-name {
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+.item-description {
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 150px;
+    white-space: nowrap;
+}
+.item-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+

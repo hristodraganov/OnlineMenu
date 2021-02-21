@@ -1,0 +1,16 @@
+.items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    padding: 1rem;
+    align-items: center;   
+    justify-items: center;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}

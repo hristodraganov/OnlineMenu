@@ -1,0 +1,109 @@
+.spacer {
+    width: 100%;
+    height: 8vh;
+}
+.cart-list {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10vh;
+}
+.cart-list ul {
+    list-style: none;
+}
+.cart-list li {
+    display: flex;
+    border-style: solid;
+    border-width: thin;
+    border-color: rgb(206, 190, 43);
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 5px;
+}
+.cart-list .quantity-total {
+    display: flex;
+    flex-direction: column;
+}
+.cart-list .quantity {
+    font-size: 1.2rem;
+    padding: 0px 10px 0px 10px;
+    background: white;
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+}
+.cart-list .quantity-buttons {
+    width: 6.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+.cart-list .info .comments {
+    padding: 1rem;
+    width: inherit;
+}
+
+/*TEXTS*/
+.cart-list .info p {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.cart-list .info input {
+    padding: 1rem; 
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid;
+    border-width: thin;
+    border-color: rgb(206, 190, 43);
+    border-radius: 4px;
+}
+.cart-list .quantity-total .quantity-buttons {
+    padding: 1rem;
+
+}
+.cart-list .quantity-total p {
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+.cart-list .quantity-total .remove {
+    padding: 0.2rem;
+    padding-left: 3.3rem;
+}
+
+.cart-list .order {
+    display: flex;
+    width: 15rem;
+    height: 3rem;
+    border: none;
+    background: rgb(68, 216, 31);
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-radius: 2px;
+    
+}
+.cart-list .order-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+.cart-list .empty-cart {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    word-wrap: break-word;
+    font-size: 1.2rem;
+    flex-direction: column;
+}
+
+.cart-list .cards {
+    display: flex;
+    margin-top: 10vh;
+    justify-content: space-around;
+    width: 80%;
+}
+.total-hr {
+    display: flex;
+    margin-top: 10vh;
+}

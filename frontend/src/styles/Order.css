@@ -1,0 +1,23 @@
+.order-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.order-box h1 {
+    position: absolute;
+    font-size: 1rem;
+    top: 0;
+    left: 0;
+    padding-left: .5rem;
+}
+.info-right {
+    padding-right: .5rem;
+}
+.order-box .date {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    padding-left: .5rem;
+
+}

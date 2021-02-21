@@ -1,0 +1,18 @@
+.spacer {
+    width: 100%;
+    height: 8vh;
+}
+.error-msg {
+    display: flex;
+}
+.error-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+.error-img {
+    display: flex;
+    width: 90%;
+}

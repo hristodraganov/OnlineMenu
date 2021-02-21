@@ -1,0 +1,72 @@
+.spacer {
+    width: 100%;
+    height: 8vh;
+}
+.item-content {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.item-content img {
+    display: flex;
+    border: 1px solid rgb(226, 175, 80, 0.8);
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+}
+.item-content .name-box {
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgb(226, 175, 80, 0.8);
+    width: 150px;
+    justify-content: center;
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+}
+.item-content .description-box {
+    display: flex;
+    margin-top: 1rem;
+    border: 1px solid rgb(226, 175, 80, 0.8);
+    width: 300px;
+    justify-content: flex-start;
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+    word-wrap: break-word;
+    height: 300px; 
+}
+.description-box span {
+    /*MIN WIDTH IS NEEEDED TO BREAK THE WORD BCS DEF MIN W IS BIGGER AND CAUSES OVERFLOWS*/
+    min-width: 90%;
+    word-wrap: break-word;
+    padding: 1rem; 
+    
+}
+.item-content .alergens-box {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    border: 1px solid rgb(226, 175, 80, 0.8);
+    width: 300px;
+    justify-content: flex-start;
+    box-shadow: 0 0 0.9375em rgba(0,0,0,0.219);
+    border-radius: 4px;
+    word-wrap: break-word;
+    height: 300px; 
+}
+.item-content .alergens-list {
+    list-style: none;
+    padding: 1rem;
+}
+.item-content .title {
+    margin-top: 1rem;
+}
+
+.name-box h5 {
+    font-size: 1.2rem;
+}
+
+
+
