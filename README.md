@@ -14,6 +14,26 @@ A full stack MERN online menu, built for restaurants.
 - Keep data on refresh
 
 
+# v2.0 Features
+# Admin panel*new*
+- Add categories
+- Add subcategories
+- Add products
+- Update categories
+- Update subcategories
+- Update products
+- Delete categories
+- Delete subcategories
+- Delete products
+# Orders*update*  
+- Dates updated to timestamps
+# Reports*new*
+- Most popular table
+- Most sold products
+- Overall sold of each subcategory
+- Overall income of each product
+
+
 # To run
 - Install Node.js: https://nodejs.org/en/
 - Open a terminal and run ```git clone github.com/rllstpwz/OnlineMenu```
