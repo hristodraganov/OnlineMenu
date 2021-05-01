@@ -15,7 +15,7 @@ A full stack MERN online menu, built for restaurants.
 
 
 # v2.0 Features
-# Admin panel*new*
+# Admin panel
 - Add categories
 - Add subcategories
 - Add products
@@ -25,9 +25,9 @@ A full stack MERN online menu, built for restaurants.
 - Delete categories
 - Delete subcategories
 - Delete products
-# Orders*update*  
+# Orders
 - Dates updated to timestamps
-# Reports*new*
+# Reports
 - Most popular table
 - Most sold products
 - Overall sold of each subcategory
