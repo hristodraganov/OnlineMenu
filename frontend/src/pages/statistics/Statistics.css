@@ -1,0 +1,35 @@
+.spacer {
+  width: 100%;
+  height: 8vh;
+}
+.statistics {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+}
+.pie {
+  height: 500px;
+  width: 70%;
+}
+.xy {
+  height: 500px;
+  width: 70%;
+}
+.date-controls {
+  display: flex;
+}
+@media screen and (max-width: 48em) {
+  .pie {
+    height: 200px;
+  }
+  .xy {
+    height: 400px;
+  }
+}
+.calendar-controls {
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 import { LOCALES } from '../locales'
-
+//eslint-disable-next-line
 export default {
     [LOCALES.ENGLISH]: {
         'modal-placeholder': 'Table number here (1-20)',
@@ -23,8 +23,8 @@ export default {
         'Hot Drinks': 'Hot Drinks',
         'Cold Drinks': 'Cold Drinks',
         'Vodka': 'Vodka',
-        'Whiskey':'Whiskey',
-        'Gin':'Gin',
+        'Whiskey': 'Whiskey',
+        'Gin': 'Gin',
         'Soft': 'Soft',
         'Wine': 'Wine',
         'Aperitives': 'Aperitives',

@@ -1,22 +1,27 @@
 const express = require('express')
-const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
+const fileUpload = require('express-fileupload')
+const imgUploadRouter = require('./routes/imgUploadRoute')
+const categoryRouter = require('./routes/category')
+const subCategoryRouter = require('./routes/subCategory')
+const productRouter = require('./routes/product')
+const ordersRouter = require('./routes/orders')
+const statisticsRouter = require('./routes/statistics')
 const PORT = 3001
+
+const app = express()
 
 app.use(cors())
 app.use(express.json())
-
-//connect to mongoose
-mongoose.connect('mongodb+srv://admin:admin1!@online-menu.pkd7v.mongodb.net/OrdersDB')
-//require route
-
-app.use('/', require('./routes/OrderRoute'))
-
-//api call
-app.use('/Menu', require('./routes/Menu'))
-
-app.listen(PORT, function() {
+app.use(fileUpload())
+app.use('/images', express.static(__dirname + '/images'))
+app.use('/upload', imgUploadRouter)
+app.use('/category', categoryRouter)
+app.use('/subCategory', subCategoryRouter)
+app.use('/product', productRouter)
+app.use('/orders', ordersRouter)
+app.use('/statistics', statisticsRouter)
+app.listen(PORT, function () {
     console.log('express is running on ' + PORT)
 })
 
