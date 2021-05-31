@@ -8,11 +8,8 @@ const replaceDuplicates = require('./replaceDuplicates')
 
 exports.fetch_most_popular_table_by_date_get = async (req, res) => {
     try {
-        const from = req.params.from.replace("T", " ").slice(0, -5);
-        const to = req.params.to.replace("T", " ").slice(0, -5);
-
         const orders = await db.query('SELECT * from _order WHERE created_at BETWEEN $1 AND $2',
-            [from, to], (err) => {
+            [req.params.from, req.params.to], (err) => {
                 if (err) throw err
             })
         let updatedOrders = orders.rows.map(item => { return { tableNumber: item.table_number, timesUsed: updates.getOccurrence(orders.rows, item.table_number) } })
@@ -36,14 +33,10 @@ exports.fetch_most_popular_table_by_date_get = async (req, res) => {
 
 exports.fetch_most_sold_product_by_date_get = async (req, res) => {
     try {
-        const from = req.params.from.replace("T", " ").slice(0, -5);
-        const to = req.params.to.replace("T", " ").slice(0, -5);
-
         const orders = await db.query('SELECT * from _order WHERE created_at BETWEEN $1 AND $2',
-            [from, to], (err) => {
+            [req.params.from, req.params.to], (err) => {
                 if (err) throw err
             })
-
         let ordersList = []
         for (let i = 0; i < orders.rows.length; i++) {
             let data = await db.query('SELECT * from order_product WHERE order_id = $1', [orders.rows[i].id])

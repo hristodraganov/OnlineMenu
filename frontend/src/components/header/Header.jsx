@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { uuid } from "uuidv4";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -40,6 +41,7 @@ function Header() {
           checked={checked}
           className="toggle"
           onClick={handleCheck}
+          readOnly
         ></input>
         <div className="hamburger">
           <div></div>
@@ -50,7 +52,11 @@ function Header() {
               <ul>
                 {categories.map((item) => (
                   <Link to={`/${item.name}`}>
-                    <li onClick={handleCheck} className="burger-link">
+                    <li
+                      key={uuid()}
+                      onClick={handleCheck}
+                      className="burger-link"
+                    >
                       {translate(item.name)}
                     </li>
                   </Link>
@@ -74,14 +80,18 @@ function Header() {
       </div>
       <div className="cart">
         <Link to="/Cart">
-          <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+          <FontAwesomeIcon id="cart" icon={faShoppingCart} size="lg" />
         </Link>
         {cart.length !== 0 ? (
           <span className="cart-items-counter">{cart.length}</span>
         ) : null}
       </div>
       <div className="lang-options">
-        <div className="selected-lang" onClick={() => setLangCheck(!langCheck)}>
+        <div
+          id="current-language"
+          className="selected-lang"
+          onClick={() => setLangCheck(!langCheck)}
+        >
           <img
             style={{ width: "32px", height: "32px" }}
             className="selected-lang-icon"
@@ -92,7 +102,7 @@ function Header() {
 
         {langCheck ? (
           <ul>
-            <li>
+            <li id="language-option-0">
               <img
                 style={{ width: "32px", height: "32px" }}
                 src="https://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg"
@@ -106,7 +116,7 @@ function Header() {
                 }}
               ></img>
             </li>
-            <li>
+            <li id="language-option-1">
               <img
                 style={{ width: "32px", height: "32px" }}
                 src="https://purecatamphetamine.github.io/country-flag-icons/3x2/BG.svg"

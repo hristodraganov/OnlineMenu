@@ -10,6 +10,7 @@ import { CartContext } from "../../Context/CartContext";
 import translate from "../../i18n/translate";
 import { Link } from "react-router-dom";
 const Card = (props) => {
+  let gridItemId = props?.text?.props?.id;
   const [cart, setCart] = useContext(CartContext);
 
   const [quantity, setQuantity] = useState(0);
@@ -41,7 +42,7 @@ const Card = (props) => {
     }
   };
   return props.orientation === "vertical" ? (
-    <div className="grid-item">
+    <div className="grid-item" id={gridItemId}>
       {props.showImg ? <img alt="" src={props.src}></img> : null}
       <p>{props.text}</p>
     </div>
@@ -63,6 +64,7 @@ const Card = (props) => {
         <div className="card-buttons">
           <div className="quantity-buttons">
             <FontAwesomeIcon
+              id={props.name + "-decrement"}
               color="rgba(212, 161, 51, 0.8)"
               size="lg"
               onClick={decrementQuantity}
@@ -70,6 +72,7 @@ const Card = (props) => {
             />
             <label className="quantity">{quantity}</label>
             <FontAwesomeIcon
+              id={props.name + "-increment"}
               color="rgba(212, 161, 51, 0.8)"
               size="lg"
               onClick={incrementQuantity}
@@ -77,6 +80,7 @@ const Card = (props) => {
             />
           </div>
           <FontAwesomeIcon
+            id={props.name + "-add-to-cart"}
             color="rgba(212, 161, 51, 0.8)"
             size="lg"
             onClick={() => addToCart()}

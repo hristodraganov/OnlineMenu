@@ -3,20 +3,21 @@ import "./Orders.css";
 import Order from "../order/Order";
 import translate from "../../i18n/translate";
 import axios from "axios";
-import "date-fns";
 import Select from "react-select";
-
-import DateFnsUtils from "@date-io/date-fns";
+import moment from "moment";
+import momentUtils from "@date-io/moment";
 import { Button } from "@material-ui/core";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
-const Orders = (props) => {
+const Orders = () => {
   const [orders, setOrders] = useState([]);
   /*eslint-disable*/
-  const [from, setFrom] = useState(new Date(Date.now()));
-  const [to, setTo] = useState(new Date(Date.now()));
+  const [date, setDate] = useState({
+    from: moment().format("DD/MM/YYYY"),
+    to: moment().format("DD/MM/YYYY"),
+  });
   const [reloadAllOrders, setReloadAllOrders] = useState(false);
   /*eslint-disable*/
   const [table, setTable] = useState(0);
@@ -51,21 +52,22 @@ const Orders = (props) => {
   const findByDate = () => {
     try {
       axios
-        .get(`http://localhost:3001/orders/get/byDate/${from}/${to}`)
+        .get(
+          `http://localhost:3001/orders/get/byDate/${moment(
+            date.from,
+            "DD/MM/YYYY"
+          ).format()}/${moment(date.to, "DD/MM/YYYY").format()}`
+        )
         .then((res) => setOrders(res.data.data.orders));
     } catch (err) {}
-  };
-  const handleChangeFrom = (evt) => {
-    setFrom(evt.toISOString());
-  };
-  const handleChangeTo = (evt) => {
-    setTo(evt.toISOString());
   };
   const handleTableChange = (selectedOpt) => {
     let num = selectedOpt.value.match(/\d+/)[0];
     setTable(parseInt(num));
   };
-
+  const handleChangeDate = (evt, value, src) => {
+    setDate({ ...date, [src]: value });
+  };
   return (
     <div>
       <div className="spacer"></div>
@@ -82,18 +84,19 @@ const Orders = (props) => {
           </h2>
 
           <div className="calendar-controls">
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <MuiPickersUtilsProvider utils={momentUtils}>
               <KeyboardDatePicker
                 style={{ margin: "10px" }}
                 disableToolbar
-                InputProps={{ readOnly: true }}
                 variant="inline"
-                format="dd/MM/yyyy"
+                format="DD/MM/YYYY"
                 margin="normal"
                 id="date-picker-inline"
                 label={translate("From")}
-                value={from}
-                onChange={handleChangeFrom}
+                value={date.from}
+                inputValue={date.from}
+                maxDate={moment(date.to, "DD/MM/YYYY").format("YYYY-MM-DD")}
+                onChange={(evt, value) => handleChangeDate(evt, value, "from")}
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
@@ -101,15 +104,15 @@ const Orders = (props) => {
               <KeyboardDatePicker
                 style={{ margin: "10px" }}
                 disableToolbar
-                InputProps={{ readOnly: true }}
                 variant="inline"
-                onChange={handleChangeTo}
-                format="dd/MM/yyyy"
+                format="DD/MM/YYYY"
                 margin="normal"
                 id="date-picker-inline"
                 label={translate("To")}
-                minDate={from}
-                value={to}
+                minDate={moment(date.from, "DD/MM/YYYY").format("YYYY-MM-DD")}
+                value={date.to}
+                inputValue={date.to}
+                onChange={(evt, value) => handleChangeDate(evt, value, "to")}
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}

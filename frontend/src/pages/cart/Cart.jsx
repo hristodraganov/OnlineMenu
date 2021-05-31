@@ -52,6 +52,7 @@ const Cart = () => {
                 name: item.name.props.id,
                 price: item.price,
                 quantity: item.quantity,
+                comments: item?.comments,
               },
             ]);
           }
@@ -64,6 +65,7 @@ const Cart = () => {
                 name: item.name,
                 price: item.price,
                 quantity: item.quantity,
+                comments: item?.comments,
               },
             ]);
           }
@@ -72,6 +74,7 @@ const Cart = () => {
     }
     //eslint-disable-next-line
   }, []);
+
   const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   };
@@ -156,13 +159,15 @@ const Cart = () => {
       setOpenSnackBar(true);
     }
   };
-  const handleComments = ({ id }) => (e) => {
-    setCart(
-      cart.map((item) =>
+  const handleComments =
+    ({ id }) =>
+    (e) => {
+      let copyCart = cart.map((item) =>
         item.id === id ? { ...item, comments: e.target.value } : item
-      )
-    );
-  };
+      );
+      setCart(copyCart);
+      localStorage.setItem("cart", stringify(copyCart));
+    };
   return (
     <div>
       {openSnackBar ? (
@@ -176,7 +181,7 @@ const Cart = () => {
       <div className="cart-list">
         <ul>
           {cart.map((item) => (
-            <li>
+            <li key={item.id}>
               <div className="info">
                 <p>{translate(item.name)}</p>
                 <div className="comments">
@@ -186,6 +191,8 @@ const Cart = () => {
                   >
                     {(placeholder) => (
                       <input
+                        id={item.name + "-comments"}
+                        value={item.comments}
                         onChange={handleComments(item)}
                         type="text"
                         placeholder={placeholder}
@@ -237,7 +244,7 @@ const Cart = () => {
           ) : null}
           {cart.length !== 0 ? (
             <div className="order-button-wrapper">
-              <button onClick={order} className="order">
+              <button onClick={order} className="order" id="order">
                 {translate("Order")}
               </button>
             </div>

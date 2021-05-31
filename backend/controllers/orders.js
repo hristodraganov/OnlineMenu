@@ -58,11 +58,9 @@ exports.fetch_orders_by_table_number_get = async (req, res) => {
     }
 }
 exports.fetch_orders_by_date_get = async (req, res) => {
-    const from = req.params.from.replace("T", " ").slice(0, -5);
-    const to = req.params.to.replace("T", " ").slice(0, -5);
     try {
         const results = await db.query('SELECT * from _order WHERE created_at BETWEEN $1 AND $2',
-            [from, to])
+            [req.params.from, req.params.to])
         let ordersList = []
         for (let i = 0; i < results.rows.length; i++) {
             let data = await db.query('SELECT * from order_product WHERE order_id = $1', [results.rows[i].id])
@@ -83,8 +81,6 @@ exports.fetch_orders_by_date_get = async (req, res) => {
         })
     }
 }
-
-
 
 exports.fetch_orders_get = async (req, res) => {
     try {

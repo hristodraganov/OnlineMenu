@@ -5,8 +5,8 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import MuiAlert from "@material-ui/lab/Alert";
-import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
+import moment from "moment";
+import momentUtils from "@date-io/moment";
 import {
   Button,
   FormControl,
@@ -21,13 +21,10 @@ import XYChart from "./Charts/XYChart";
 import translate from "../../i18n/translate";
 
 const Statistics = () => {
-  let fromInitial = new Date(Date.now());
-  let toInitial = new Date(Date.now());
   const [xyTitle, setXyTitle] = useState({
     x: "",
     y: "",
   });
-
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const [snackBarType, setSnackBarType] = useState("success");
@@ -38,21 +35,16 @@ const Statistics = () => {
   const [pieType, setPieType] = useState("");
   const [pieCategory, setPieCategory] = useState("");
   const [pieValue, setPieValue] = useState("");
-  const [from, setFrom] = useState(fromInitial.toISOString());
   const [data, setData] = useState([]);
   const [xyData, setXyData] = useState([]);
-  const [to, setTo] = useState(toInitial.toISOString());
-  var now = new Date();
-  now = now.setDate(now.getDate());
-  var weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
+  const [date, setDate] = useState({
+    productFrom: moment().format("DD/MM/YYYY"),
+    productTo: moment().format("DD/MM/YYYY"),
+    tableFrom: moment().format("DD/MM/YYYY"),
+    tableTo: moment().format("DD/MM/YYYY"),
+  });
+  let weekAgo = moment().subtract(7, "d").format("YYYY-MM-DD");
 
-  const handleChangeFrom = (evt) => {
-    setFrom(evt.toISOString());
-  };
-  const handleChangeTo = (evt) => {
-    setTo(evt.toISOString());
-  };
   const handleRadioChange = (evt) => {
     setOverAll(evt.target.value);
   };
@@ -70,7 +62,12 @@ const Statistics = () => {
     setPieValue("quantity");
 
     axios
-      .get(`http://localhost:3001/statistics/get/products/${from}/${to}/`)
+      .get(
+        `http://localhost:3001/statistics/get/products/${moment(
+          date.productFrom,
+          "DD/MM/YYYY"
+        ).format()}/${moment(date.productTo, "DD/MM/YYYY").format()}/`
+      )
       .then((res) => {
         setData(res.data.data.info);
         if (res.data.data.status === "error") {
@@ -82,8 +79,14 @@ const Statistics = () => {
     setPieType("tables");
     setPieCategory("table");
     setPieValue("timesUsed");
+
     axios
-      .get(`http://localhost:3001/statistics/get/tables/${from}/${to}/`)
+      .get(
+        `http://localhost:3001/statistics/get/tables/${moment(
+          date.tableFrom,
+          "DD/MM/YYYY"
+        ).format()}/${moment(date.tableTo, "DD/MM/YYYY").format()}`
+      )
       .then((res) => {
         setData(res.data.data.tables);
         if (res.data.data.status === "error") {
@@ -128,6 +131,9 @@ const Statistics = () => {
     }
     setOpenSnackBar(false);
   };
+  const handleChangeDate = (evt, value, src) => {
+    setDate({ ...date, [src]: value });
+  };
   return (
     <section className="statistics">
       <div className="spacer"></div>
@@ -141,19 +147,24 @@ const Statistics = () => {
       <h3>{translate("Most sold products")}</h3>
       <div className="controls-wrapper">
         <div className="calendar-controls">
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <MuiPickersUtilsProvider utils={momentUtils}>
             <KeyboardDatePicker
               style={{ margin: "10px" }}
               disableToolbar
-              InputProps={{ readOnly: true }}
+              inputValue={date.productFrom}
               variant="inline"
-              format="dd/MM/yyyy"
+              format="DD/MM/YYYY"
               margin="normal"
               minDate={weekAgo}
+              maxDate={moment(date.productTo, "DD/MM/YYYY").format(
+                "YYYY-MM-DD"
+              )}
               id="date-picker-inline"
               label={translate("From")}
-              value={from}
-              onChange={handleChangeFrom}
+              value={date.productFrom}
+              onChange={(evt, value) =>
+                handleChangeDate(evt, value, "productFrom")
+              }
               KeyboardButtonProps={{
                 "aria-label": "change date",
               }}
@@ -161,16 +172,20 @@ const Statistics = () => {
             <KeyboardDatePicker
               style={{ margin: "10px" }}
               disableToolbar
-              InputProps={{ readOnly: true }}
               variant="inline"
-              onChange={handleChangeTo}
-              format="dd/MM/yyyy"
+              onChange={(evt, value) =>
+                handleChangeDate(evt, value, "productTo")
+              }
+              format="DD/MM/YYYY"
               margin="normal"
               id="date-picker-inline"
               label={translate("To")}
-              minDate={from}
-              maxDate={to}
-              value={to}
+              minDate={moment(date.productFrom, "DD/MM/YYYY").format(
+                "YYYY-MM-DD"
+              )}
+              maxDate={date.productTo}
+              value={date.productTo}
+              inputValue={date.productTo}
               KeyboardButtonProps={{
                 "aria-label": "change date",
               }}
@@ -185,36 +200,42 @@ const Statistics = () => {
             {translate("Search")}
           </Button>
           <h3>{translate("Most popular tables")}</h3>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <MuiPickersUtilsProvider utils={momentUtils}>
             <KeyboardDatePicker
               style={{ margin: "10px" }}
               disableToolbar
-              InputProps={{ readOnly: true }}
               variant="inline"
-              format="dd/MM/yyyy"
+              format="DD/MM/YYYY"
               margin="normal"
               minDate={weekAgo}
+              maxDate={moment(date.tableTo, "DD/MM/YYYY").format("YYYY-MM-DD")}
               id="date-picker-inline"
               label={translate("From")}
-              value={from}
-              onChange={handleChangeFrom}
+              value={date.tableFrom}
+              inputValue={date.tableFrom}
+              onChange={(evt, value) =>
+                handleChangeDate(evt, value, "tableFrom")
+              }
               KeyboardButtonProps={{
                 "aria-label": "change date",
               }}
             />
+            {console.log()}
             <KeyboardDatePicker
               style={{ margin: "10px" }}
               disableToolbar
-              InputProps={{ readOnly: true }}
               variant="inline"
-              onChange={handleChangeTo}
-              format="dd/MM/yyyy"
+              onChange={(evt, value) => handleChangeDate(evt, value, "tableTo")}
+              format="DD/MM/YYYY"
               margin="normal"
               id="date-picker-inline"
               label={translate("To")}
-              minDate={from}
-              maxDate={now}
-              value={to}
+              minDate={moment(date.tableFrom, "DD/MM/YYYY").format(
+                "YYYY-MM-DD"
+              )}
+              maxDate={moment().format("DD/MM/YYYY")}
+              value={date.tableTo}
+              inputValue={date.tableTo}
               KeyboardButtonProps={{
                 "aria-label": "change date",
               }}

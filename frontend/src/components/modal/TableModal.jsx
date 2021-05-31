@@ -26,6 +26,7 @@ const TableModal = () => {
             <FormattedMessage id="modal-placeholder" defaultMessage="search">
               {(placeholder) => (
                 <input
+                  id="table-number"
                   className="table-number-input"
                   onChange={(e) => setTableNumber(e.target.value)}
                   type="text"
@@ -35,6 +36,7 @@ const TableModal = () => {
               )}
             </FormattedMessage>
             <button
+              id="table-number-button"
               className="submit-table-number"
               onClick={() =>
                 tableNumber !== 0 && tableNumber > 0 && tableNumber < 21

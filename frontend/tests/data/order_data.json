@@ -1,0 +1,45 @@
+{
+  "tableNumber": "3",
+  "orderProducts": {
+    "food": {
+      "Sushi": {
+        "items": [
+          {
+            "name": "Sushi 1",
+            "quantity": "2",
+            "comments": "No fish!"
+          }
+        ]
+      },
+      "Meat": {
+        "items": [
+          {
+            "name": "Meat 1",
+            "quantity": "1",
+            "comments": "Medium rare please"
+          }
+        ]
+      }
+    },
+    "drinks": {
+      "Wine": {
+        "items": [
+          {
+            "name": "Wine 1",
+            "quantity": "2",
+            "comments": ""
+          }
+        ]
+      },
+      "Hot Drinks": {
+        "items": [
+          {
+            "name": "Tea",
+            "quantity": "1",
+            "comments": "With a slice of lemon if possible"
+          }
+        ]
+      }
+    }
+  }
+}

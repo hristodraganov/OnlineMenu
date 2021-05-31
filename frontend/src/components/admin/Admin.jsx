@@ -359,6 +359,7 @@ const Admin = (props) => {
       <div className="button-links">
         <Link to="/orders">
           <Button
+            id="orders-button"
             style={{ margin: "1rem" }}
             variant="contained"
             color="primary"
@@ -368,6 +369,7 @@ const Admin = (props) => {
         </Link>
         <Link to="/reports">
           <Button
+            id="reports-button"
             style={{ margin: "1rem" }}
             variant="contained"
             color="primary"

@@ -45,17 +45,18 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
               <TextField
-                id="standard-basic"
+                id="username"
                 label={translate("USERNAME")}
                 onChange={handleChange}
               />
               <TextField
-                id="standard-password-input"
+                id="password"
                 label={translate("PASSWORD")}
                 type="password"
                 onChange={handleChange}
               />
               <Button
+                id="login-button"
                 style={{ marginTop: "2rem" }}
                 variant="contained"
                 color="default"
