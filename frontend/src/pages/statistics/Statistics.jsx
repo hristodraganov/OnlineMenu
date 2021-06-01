@@ -159,7 +159,7 @@ const Statistics = () => {
               maxDate={moment(date.productTo, "DD/MM/YYYY").format(
                 "YYYY-MM-DD"
               )}
-              id="date-picker-inline"
+              id="product-from"
               label={translate("From")}
               value={date.productFrom}
               onChange={(evt, value) =>
@@ -178,12 +178,14 @@ const Statistics = () => {
               }
               format="DD/MM/YYYY"
               margin="normal"
-              id="date-picker-inline"
+              id="product-to"
               label={translate("To")}
               minDate={moment(date.productFrom, "DD/MM/YYYY").format(
                 "YYYY-MM-DD"
               )}
-              maxDate={date.productTo}
+              maxDate={moment(date.productFrom, "DD/MM/YYYY")
+                .add(7, "d")
+                .format("YYYY-MM-DD")}
               value={date.productTo}
               inputValue={date.productTo}
               KeyboardButtonProps={{
@@ -192,6 +194,7 @@ const Statistics = () => {
             />
           </MuiPickersUtilsProvider>
           <Button
+            id="search-by-product"
             style={{ marginTop: "1vh" }}
             variant="contained"
             color="default"
@@ -209,7 +212,7 @@ const Statistics = () => {
               margin="normal"
               minDate={weekAgo}
               maxDate={moment(date.tableTo, "DD/MM/YYYY").format("YYYY-MM-DD")}
-              id="date-picker-inline"
+              id="table-from"
               label={translate("From")}
               value={date.tableFrom}
               inputValue={date.tableFrom}
@@ -220,20 +223,21 @@ const Statistics = () => {
                 "aria-label": "change date",
               }}
             />
-            {console.log()}
             <KeyboardDatePicker
+              id="table-to"
               style={{ margin: "10px" }}
               disableToolbar
               variant="inline"
               onChange={(evt, value) => handleChangeDate(evt, value, "tableTo")}
               format="DD/MM/YYYY"
               margin="normal"
-              id="date-picker-inline"
               label={translate("To")}
               minDate={moment(date.tableFrom, "DD/MM/YYYY").format(
                 "YYYY-MM-DD"
               )}
-              maxDate={moment().format("DD/MM/YYYY")}
+              maxDate={moment(date.productFrom, "DD/MM/YYYY")
+                .add(7, "d")
+                .format("YYYY-MM-DD")}
               value={date.tableTo}
               inputValue={date.tableTo}
               KeyboardButtonProps={{
@@ -242,6 +246,7 @@ const Statistics = () => {
             />
           </MuiPickersUtilsProvider>
           <Button
+            id="search-by-table"
             style={{ marginTop: "1vh" }}
             variant="contained"
             color="default"
@@ -270,23 +275,24 @@ const Statistics = () => {
         >
           <FormControlLabel
             value="Food"
-            control={<Radio color="default" />}
+            control={<Radio color="default" id="food" />}
             label={translate("Food")}
           />
           <FormControlLabel
             value="Drinks"
-            control={<Radio color="default" />}
+            control={<Radio color="default" id="drinks" />}
             label={translate("Drinks")}
           />
           <FormControlLabel
             value="Products"
-            control={<Radio color="default" />}
+            control={<Radio color="default" id="income" />}
             label={translate("Income by products")}
           />
         </RadioGroup>
       </FormControl>
 
       <Button
+        id="search-overall"
         style={{ marginTop: "1vh" }}
         variant="contained"
         color="default"
