@@ -9,54 +9,86 @@ const selenium_helpers = require('./selenium_helpers'),
 
 
 const log_in_admin = async (driver, data) => {
-    await driver.get('http://localhost:3000/admin')
-    await add_text_by_id(data.username, 'username', driver)
-    await add_text_by_id(data.password, 'password', driver)
-    await click_by_id('login-button', driver)
+    try {
+        await driver.get('http://localhost:3000/admin')
+        await add_text_by_id(data.username, 'username', driver)
+        await add_text_by_id(data.password, 'password', driver)
+        await click_by_id('login-button', driver)
+    } catch (e) {
+        throw e
+    }
 }
 const open_reports_page = async (driver) => {
-    await click_by_id('reports-button', driver)
+    try {
+        await click_by_id('reports-button', driver)
+    } catch (e) {
+        throw e
+    }
 }
 const query_most_sold_products = async (driver, data) => {
-    //FROM
-    await add_text_by_id(Key.CONTROL + "a", 'product-from', driver)
-    await add_text_by_id(Key.CLEAR, 'product-from', driver)
-    await add_text_by_id(data.from, 'product-from', driver)
-    //TO
-    await add_text_by_id(Key.CONTROL + "a", 'product-to', driver)
-    await add_text_by_id(Key.CLEAR, 'product-to', driver)
-    await add_text_by_id(data.to, 'product-to', driver)
+    try {
+        //FROM
+        await add_text_by_id(Key.CONTROL + "a", 'product-from', driver)
+        await add_text_by_id(Key.CLEAR, 'product-from', driver)
+        await add_text_by_id(data.from, 'product-from', driver)
+        //TO
+        await add_text_by_id(Key.CONTROL + "a", 'product-to', driver)
+        await add_text_by_id(Key.CLEAR, 'product-to', driver)
+        await add_text_by_id(data.to, 'product-to', driver)
 
-    await click_by_id('search-by-product', driver)
+        await click_by_id('search-by-product', driver)
+    } catch (e) {
+        throw e
+    }
 }
 const query_most_popular_table = async (driver, data) => {
-    //FROM
-    await add_text_by_id(Key.CONTROL + "a", 'table-from', driver)
-    await add_text_by_id(Key.CLEAR, 'table-from', driver)
-    await add_text_by_id(data.from, 'table-from', driver)
-    //TO
-    await add_text_by_id(Key.CONTROL + "a", 'table-to', driver)
-    await add_text_by_id(Key.CLEAR, 'table-to', driver)
-    await add_text_by_id(data.to, 'table-to', driver)
+    try {
+        //FROM
+        await add_text_by_id(Key.CONTROL + "a", 'table-from', driver)
+        await add_text_by_id(Key.CLEAR, 'table-from', driver)
+        await add_text_by_id(data.from, 'table-from', driver)
+        //TO
+        await add_text_by_id(Key.CONTROL + "a", 'table-to', driver)
+        await add_text_by_id(Key.CLEAR, 'table-to', driver)
+        await add_text_by_id(data.to, 'table-to', driver)
 
-    await click_by_id('search-by-table', driver)
+        await click_by_id('search-by-table', driver)
+    } catch (e) {
+        throw e
+    }
 }
 const query_overall_food = async (driver) => {
-    await click_by_id('food', driver, browser)
-    await click_by_id('search-overall', driver, browser)
+    try {
+        await click_by_id('food', driver, browser)
+        await click_by_id('search-overall', driver, browser)
+    } catch (e) {
+        throw e
+    }
 }
 const query_overall_drinks = async (driver) => {
-    await click_by_id('drinks', driver, browser)
-    await click_by_id('search-overall', driver, browser)
+    try {
+        await click_by_id('drinks', driver, browser)
+        await click_by_id('search-overall', driver, browser)
+    } catch (e) {
+        throw e
+    }
 }
 const query_overall_income = async (driver) => {
-    await click_by_id('income', driver, browser)
-    await click_by_id('search-overall', driver, browser)
+    try {
+        await click_by_id('income', driver, browser)
+        await click_by_id('search-overall', driver, browser)
+    } catch (e) {
+        throw e
+    }
 }
 const query_overall = async (driver) => {
-    await query_overall_food(driver)
-    await query_overall_drinks(driver)
-    await query_overall_income(driver)
+    try {
+        await query_overall_food(driver)
+        await query_overall_drinks(driver)
+        await query_overall_income(driver)
+    } catch (e) {
+        throw e
+    }
 }
 const test = async (driver, data, loginCredentials) => {
     try {
@@ -77,7 +109,7 @@ const test = async (driver, data, loginCredentials) => {
 }
 
 const run = async (script_args) => {
-    const data = require('./data/reports_data.json')
+    const data = require('./data/query_data.json')
     const loginCredentials = require('./data/login_credentials.json')
     let browser_in_params = script_args.indexOf("browser");
     if (browser_in_params > -1 && script_args[browser_in_params + 1])

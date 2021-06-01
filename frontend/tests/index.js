@@ -2,6 +2,8 @@ const orders = require('./orderTest'),
     ordersTest = orders.run;
 const reports = require('./reportsTest'),
     reportsTest = reports.run;
+const ordersQuery = require('./ordersQueryTest'),
+    ordersQueryTest = ordersQuery.run;
 
 let script_args = process.argv.slice(2);
 let test_type = script_args.indexOf("type");
@@ -17,8 +19,11 @@ const execute = async () => {
         case 'reports':
             await reportsTest(script_args)
             break;
+        case 'ordersquery':
+            await ordersQueryTest(script_args)
+            break;
         default:
-            console.log('TEST TYPE MUST BE ONE OF THE FOLLOWING: orders | reports');
+            console.log('TEST TYPE MUST BE ONE OF THE FOLLOWING: orders | reports | ordersquery');
             console.log('TO RUN ALL DO NOT SPECIFY type PARAMETER');
             process.exit(1)
     }

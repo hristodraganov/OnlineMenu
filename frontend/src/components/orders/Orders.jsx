@@ -91,7 +91,7 @@ const Orders = () => {
                 variant="inline"
                 format="DD/MM/YYYY"
                 margin="normal"
-                id="date-picker-inline"
+                id="date-from"
                 label={translate("From")}
                 value={date.from}
                 inputValue={date.from}
@@ -107,7 +107,7 @@ const Orders = () => {
                 variant="inline"
                 format="DD/MM/YYYY"
                 margin="normal"
-                id="date-picker-inline"
+                id="date-to"
                 label={translate("To")}
                 minDate={moment(date.from, "DD/MM/YYYY").format("YYYY-MM-DD")}
                 value={date.to}
@@ -120,6 +120,7 @@ const Orders = () => {
             </MuiPickersUtilsProvider>
           </div>
           <Button
+            id="search-by-date"
             style={{ marginTop: "1vh" }}
             variant="contained"
             color="default"
@@ -132,6 +133,7 @@ const Orders = () => {
           <h2 style={{ fontWeight: "bold" }}>{translate("Find by table")}</h2>
 
           <Select
+            inputId="table-number"
             className="select-table"
             placeholder={translate("Table...")}
             required={true}
@@ -140,6 +142,7 @@ const Orders = () => {
           />
 
           <Button
+            id="search-by-table-number"
             style={{ marginTop: "1vh" }}
             variant="contained"
             color="default"
@@ -148,6 +151,7 @@ const Orders = () => {
             {translate("Search")}
           </Button>
           <Button
+            id="show-all"
             style={{ marginTop: "1.5rem" }}
             variant="contained"
             color="default"
