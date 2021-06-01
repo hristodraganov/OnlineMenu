@@ -21,8 +21,15 @@ app.use('/subCategory', subCategoryRouter)
 app.use('/product', productRouter)
 app.use('/orders', ordersRouter)
 app.use('/statistics', statisticsRouter)
-app.listen(PORT, function () {
-    console.log('express is running on ' + PORT)
-})
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, function () {
+        console.log('express is running on ' + PORT)
+    })
+}
+
+
+module.exports = {
+    app
+}
 
 
